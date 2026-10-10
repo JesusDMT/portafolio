@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jesús · JDMT — Full Stack Developer</title>
+<meta name="description" content="Desarrollador Full Stack especializado en C#, ASP.NET Core y MongoDB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090D;--bg2:#0D1117;--card:#11161E;--line:#232A35;--txt:#E6EDF3;--mut:#8B949E;--acc:#8A63FF;--acc2:#512BD4;--cy:#22D3EE}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* progress + nav */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc2),var(--acc),var(--cy));z-index:100}
+nav{position:fixed;top:0;left:0;right:0;z-index:90;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(7,9,13,.82);backdrop-filter:blur(12px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:800;letter-spacing:.5px}.logo span{color:var(--acc)}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--mut)}
+nav ul a{transition:color .2s}nav ul a:hover,nav ul a.on{color:var(--txt)}
+@media(max-width:720px){nav ul{display:none}}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.35;mask-image:radial-gradient(ellipse at 30% 40%,#000 20%,transparent 70%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);will-change:transform}
+.orb.a{width:520px;height:520px;background:var(--acc2);opacity:.45;top:-120px;right:-80px}
+.orb.b{width:380px;height:380px;background:var(--cy);opacity:.14;bottom:-120px;right:240px}
+.hero .wrap{position:relative;z-index:2}
+.eyebrow{color:var(--acc);font-size:13px;letter-spacing:4px;font-weight:600;text-transform:uppercase}
+h1{font-size:clamp(44px,8vw,96px);line-height:1.02;font-weight:800;letter-spacing:-2px;margin:18px 0 22px}
+h1 .grad{background:linear-gradient(90deg,#fff,#B9A4FF 60%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,21px);color:#C9D1D9;max-width:640px}
+.lead b{color:#fff;font-weight:600}
+.cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{padding:14px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s}
+.btn.p{background:var(--acc2);box-shadow:0 10px 40px -10px var(--acc2)}
+.btn.p:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px var(--acc)}
+.btn.g{border:1px solid var(--line)}.btn.g:hover{border-color:var(--acc);transform:translateY(-2px)}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--mut);font-size:12px;letter-spacing:3px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2}
+.scroll-hint i{width:1px;height:46px;background:linear-gradient(var(--acc),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* hero intro animation */
+.in{opacity:0;transform:translateY(30px);animation:in 1s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+
+/* sections */
+section{padding:130px 0;position:relative}
+.sec-head{margin-bottom:56px}
+.sec-head .num{color:var(--acc);font-size:13px;letter-spacing:4px;font-weight:600}
+.sec-head h2{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1px;margin-top:8px}
+.bar{height:2px;background:linear-gradient(90deg,var(--acc2),transparent);margin-top:22px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.2,.7,.2,1) .2s}
+.show .bar,.bar.show{transform:scaleX(1)}
+
+/* reveal system */
+.rv{opacity:0;transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.up{transform:translateY(60px)}
+.rv.left{transform:translateX(-70px)}
+.rv.right{transform:translateX(70px)}
+.rv.zoom{transform:scale(.88)}
+.rv.show{opacity:1;transform:none}
+
+/* about */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start}
+.about p{font-size:19px;color:#C9D1D9;margin-bottom:18px}
+.about p b{color:#fff}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc)}
+.stat strong{display:block;font-size:26px;font-weight:800}
+.stat span{color:var(--mut);font-size:14px}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+
+/* areas */
+.areas{display:grid;gap:14px}
+.area{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px;transition:border-color .3s,transform .3s}
+.area:hover{border-color:var(--acc);transform:translateX(6px)}
+.area h3{font-size:19px;display:flex;align-items:center;gap:14px}
+.area h3::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px var(--acc)}
+.area p{color:#C9D1D9}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:13px;padding:5px 12px;border-radius:999px;background:#1A2030;border:1px solid var(--line);color:#C9D1D9}
+@media(max-width:720px){.area{grid-template-columns:1fr}}
+
+/* stack */
+.stack{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+.stack .rv{transition-duration:.7s}
+.stack img{width:64px;height:64px;transition:transform .3s}
+.stack img:hover{transform:translateY(-6px) scale(1.08)}
+.stack .feat img{width:84px;height:84px}
+
+/* projects */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.proj{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.proj::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
+.proj::after{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(138,99,255,.12),transparent 50%);opacity:0;transition:opacity .3s}
+.proj:hover{border-color:var(--c);transform:translateY(-6px)}
+.proj:hover::after{opacity:1}
+.proj h3{font-size:24px;font-weight:800;margin-bottom:10px}
+.proj p{color:#C9D1D9;margin-bottom:26px}
+.proj .meta{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mut)}
+.proj .meta i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px}
+.proj .go{color:var(--acc);font-weight:600}
+@media(max-width:760px){.projects{grid-template-columns:1fr}}
+
+/* contact */
+.contact{text-align:center;background:linear-gradient(160deg,#120D2B,var(--bg2));border:1px solid var(--line);border-radius:28px;padding:80px 28px;position:relative;overflow:hidden}
+.contact h2{font-size:clamp(34px,6vw,64px);font-weight:800;letter-spacing:-1.5px}
+.contact p{color:#C9D1D9;font-size:19px;margin:16px auto 36px;max-width:560px}
+.contact .btn{font-size:17px;padding:18px 34px}
+footer{padding:40px 0;color:var(--mut);font-size:13px;text-align:center}
+
+@media(prefers-reduced-motion:reduce){.rv,.in,.bar{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav id="nav"><div class="wrap">
+  <a href="#inicio" class="logo">JDMT<span>.</span></a>
+  <ul>
+    <li><a href="#perfil">Perfil</a></li>
+    <li><a href="#areas">Especialización</a></li>
+    <li><a href="#stack">Tecnologías</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="inicio">
+  <div class="grid-bg"></div>
+  <div class="orb a" data-par="0.25"></div>
+  <div class="orb b" data-par="-0.15"></div>
+  <div class="wrap">
+    <div class="eyebrow in" style="animation-delay:.1s">Full Stack Developer</div>
+    <h1 class="in" style="animation-delay:.25s">Hola, soy <span class="grad">Jesús</span>.<br>Construyo software<br>que escala.</h1>
+    <p class="lead in" style="animation-delay:.45s">Especializado en <b>C# y ASP.NET Core</b>, con persistencia en <b>MongoDB</b>, interfaces en <b>JavaScript / TypeScript</b> y automatización de procesos con <b>n8n e IA</b>.</p>
+    <div class="cta in" style="animation-delay:.65s">
+      <a class="btn p" href="#proyectos">Ver proyectos</a>
+      <a class="btn g" href="mailto:jesus1407tj@gmail.com">Contactar</a>
+    </div>
+  </div>
+  <div class="scroll-hint mono">SCROLL<i></i></div>
+</header>
+
+<section id="perfil"><div class="wrap">
+  <div class="sec-head rv up"><div class="num mono">01 — PERFIL</div><h2>Sobre mí</h2><div class="bar"></div></div>
+  <div class="about">
+    <div>
+      <p class="rv left">Desarrollador Full Stack especializado en el ecosistema <b>.NET</b>. Diseño y construyo aplicaciones web y APIs con <b>C# y ASP.NET Core</b>, con persistencia en <b>MongoDB</b>.</p>
+      <p class="rv left" style="--d:.12s">Desarrollo interfaces modernas en <b>JavaScript y TypeScript</b>, y complemento mi trabajo con automatización de procesos mediante <b>n8n</b> e integraciones con modelos de IA.</p>
+      <p class="rv left" style="--d:.24s">Mi enfoque: soluciones limpias, mantenibles y orientadas a resolver necesidades reales de negocio.</p>
+    </div>
+    <div class="stats">
+      <div class="stat rv zoom" style="--d:.1s"><strong>.NET</strong><span>Especialidad</span></div>
+      <div class="stat rv zoom" style="--d:.2s"><strong>Full Stack</strong><span>Backend + Frontend</span></div>
+      <div class="stat rv zoom" style="--d:.3s"><strong>APIs REST</strong><span>Diseño e integración</span></div>
+      <div class="stat rv zoom" style="--d:.4s"><strong>n8n + IA</strong><span>Automatización</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="areas"><div class="wrap">
+  <div class="sec-head rv up"><div class="num mono">02 — ESPECIALIZACIÓN</div><h2>Áreas de trabajo</h2><div class="bar"></div></div>
+  <div class="areas">
+    <div class="area rv right"><h3>Backend</h3><div class="tags"><span>C#</span><span>ASP.NET Core</span><span>APIs REST</span><span>Arquitectura por capas</span><span>Autenticación</span></div></div>
+    <div class="area rv right" style="--d:.1s"><h3>Datos</h3><div class="tags"><span>MongoDB</span><span>Modelado de documentos</span><span>SQL</span></div></div>
+    <div class="area rv right" style="--d:.2s"><h3>Frontend</h3><div class="tags"><span>JavaScript</span><span>TypeScript</span><span>HTML5</span><span>CSS3</span></div></div>
+    <div class="area rv right" style="--d:.3s"><h3>Automatización e IA</h3><div class="tags"><span>n8n</span><span>Integración de APIs</span><span>Flujos con LLMs</span><span>Python</span></div></div>
+    <div class="area rv right" style="--d:.4s"><h3>Herramientas</h3><div class="tags"><span>Git</span><span>GitHub</span><span>Visual Studio</span><span>VS Code</span><span>Docker</span></div></div>
+  </div>
+</div></section>
+
+<section id="stack"><div class="wrap">
+  <div class="sec-head rv up"><div class="num mono">03 — TECNOLOGÍAS</div><h2>Stack técnico</h2><div class="bar"></div></div>
+  <div class="stack" id="stackList"></div>
+</div></section>
+
+<section id="proyectos"><div class="wrap">
+  <div class="sec-head rv up"><div class="num mono">04 — PROYECTOS</div><h2>Trabajo seleccionado</h2><div class="bar"></div></div>
+  <div class="projects">
+    <a class="proj rv up" style="--c:#3776AB" href="https://github.com/JesusDMT/Inventario" target="_blank" rel="noopener"><h3>Inventario</h3><p>Sistema de gestión de inventario con pruebas unitarias.</p><div class="meta"><span><i></i>Python</span><span class="go">Ver repositorio →</span></div></a>
+    <a class="proj rv up" style="--c:#EA4B71;--d:.15s" href="https://github.com/JesusDMT/n8n-Prueba" target="_blank" rel="noopener"><h3>n8n-Prueba</h3><p>Flujos de automatización e integraciones con IA.</p><div class="meta"><span><i></i>n8n · TypeScript</span><span class="go">Ver repositorio →</span></div></a>
+    <a class="proj rv up" style="--c:#00599C" href="https://github.com/JesusDMT/Eco_Mas_Repo" target="_blank" rel="noopener"><h3>Eco_Mas_Repo</h3><p>Proyecto de software desarrollado en C++.</p><div class="meta"><span><i></i>C++</span><span class="go">Ver repositorio →</span></div></a>
+    <a class="proj rv up" style="--c:#E34F26;--d:.15s" href="https://github.com/JesusDMT" target="_blank" rel="noopener"><h3>GitHub</h3><p>Todos mis repositorios y contribuciones.</p><div class="meta"><span><i></i>@JesusDMT</span><span class="go">Ver perfil →</span></div></a>
+  </div>
+</div></section>
+
+<section id="contacto"><div class="wrap">
+  <div class="contact rv zoom">
+    <div class="num mono" style="color:var(--acc);font-size:13px;letter-spacing:4px">05 — CONTACTO</div>
+    <h2 style="margin-top:12px">Trabajemos juntos</h2>
+    <p>Disponible para proyectos freelance, colaboraciones y posiciones Full Stack / .NET.</p>
+    <a class="btn p" href="mailto:jesus1407tj@gmail.com">jesus1407tj@gmail.com</a>
+    <div style="margin-top:22px;color:var(--mut);font-size:14px">Colombia · <a href="https://github.com/JesusDMT" style="color:var(--acc)">github.com/JesusDMT</a></div>
+  </div>
+</div></section>
+
+<footer>© <span id="y"></span> Jesús · JDMT</footer>
+
+<script>
+// stack icons
+const icons=[['cs',1],['dotnet',1],['mongodb',1],'js','ts','html','css','python','nodejs','mysql','git','github','docker','visualstudio','vscode'];
+const sl=document.getElementById('stackList');
+icons.forEach((it,i)=>{const [n,f]=Array.isArray(it)?it:[it,0];const d=document.createElement('div');d.className='rv zoom'+(f?' feat':'');d.style.setProperty('--d',(i*0.05)+'s');d.innerHTML=`<img src="https://skillicons.dev/icons?i=${n}" alt="${n}" loading="lazy">`;sl.appendChild(d)});
+document.getElementById('y').textContent=new Date().getFullYear();
+
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');e.target.querySelectorAll('.bar').forEach(b=>b.classList.add('show'));io.unobserve(e.target)}}),{threshold:.18,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// progress bar, nav, parallax, active link
+const prog=document.getElementById('progress'),nav=document.getElementById('nav'),orbs=document.querySelectorAll('[data-par]');
+const links=[...document.querySelectorAll('nav ul a')],secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+function onScroll(){const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?y/h*100:0)+'%';nav.classList.toggle('solid',y>40);
+orbs.forEach(o=>o.style.transform=`translateY(${y*o.dataset.par}px)`);
+let cur=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});links.forEach((l,i)=>l.classList.toggle('on',i===cur&&y>200))}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// spotlight on project cards
+document.querySelectorAll('.proj').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+</script>
+</body>
+</html>
